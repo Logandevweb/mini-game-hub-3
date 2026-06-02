@@ -1,5 +1,5 @@
 # Étape 1 : Build du frontend
-FROM node:18 AS frontend
+FROM node:22 AS frontend
 WORKDIR /app
 COPY frontend ./frontend
 RUN cd frontend && npm install && npm run build
@@ -33,4 +33,4 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 EXPOSE 8080
 
 # Lancer Laravel
-CMD php artisan serve --host=0.0.0.0 --port=8080
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
