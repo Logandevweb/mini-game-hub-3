@@ -17,13 +17,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copier uniquement le backend Laravel
+# Copier le backend Laravel
 COPY backend/ .
 
 RUN composer install --no-dev --optimize-autoloader
 
-# Copier le build du frontend dans public/
-COPY --from=frontend /app/frontend/dist ./public
+# 👉 Copier le bon dossier du frontend
+COPY --from=frontend /app/frontend/public ./public
 
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
